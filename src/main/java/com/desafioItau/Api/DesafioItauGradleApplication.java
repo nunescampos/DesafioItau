@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DesafioItauGradleApplication {
 
 	public static void main(String[] args) {
-	cfW	SpringApplication.run(DesafioItauGradleApplication.class, args);
+		SpringApplication.run(DesafioItauGradleApplication.class, args);
 	}
 
 }
