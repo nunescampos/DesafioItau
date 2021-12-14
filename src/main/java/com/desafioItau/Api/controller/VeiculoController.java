@@ -28,7 +28,6 @@ import com.desafioItau.Api.entity.dto.VeiculoRequestDto;
 import com.desafioItau.Api.service.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8084")
 @RequestMapping(path = "/veiculos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class VeiculoController {
 	
