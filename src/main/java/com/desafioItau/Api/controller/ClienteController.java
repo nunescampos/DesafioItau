@@ -2,10 +2,6 @@ package com.desafioItau.Api.controller;
 
 import java.util.ArrayList;
 
-
-
-
-
 import java.util.List;
 
 import javax.validation.Valid;
@@ -28,13 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
-import com.desafioItau.Api.Util.Optional;
-import com.desafioItau.Api.Exception.ClienteNotFoundException;
-import com.desafioItau.Api.Exception.ContratoVencidoException;
-import com.desafioItau.Api.Exception.CpfException;
-import com.desafioItau.Api.Entity.Cliente;
-import com.desafioItau.Api.Repository.ClienteRepository;
-import com.desafioItau.Api.Responses.Response;
+import com.desafioItau.Api.util.Optional;
+import com.desafioItau.Api.exception.ClienteNotFoundException;
+import com.desafioItau.Api.exception.ContratoVencidoException;
+import com.desafioItau.Api.exception.CpfException;
+import com.desafioItau.Api.entity.Cliente;
+import com.desafioItau.Api.repository.ClienteRepository;
+import com.desafioItau.Api.responses.Response;
 
 @RestController
 @RequestMapping("/cliente")

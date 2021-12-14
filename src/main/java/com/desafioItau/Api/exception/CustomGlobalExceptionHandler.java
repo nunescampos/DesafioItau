@@ -11,7 +11,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedHashMap;

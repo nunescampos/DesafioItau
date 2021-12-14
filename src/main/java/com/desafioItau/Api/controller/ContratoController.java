@@ -3,6 +3,7 @@ package com.desafioItau.Api.controller;
 import java.util.ArrayList;
 
 
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.desafioItau.Api.Entity.Cliente;
-import com.desafioItau.Api.Entity.Contrato;
-import com.desafioItau.Api.Repository.ContratoRepository;
-import com.desafioItau.Api.Responses.Response;
+import com.desafioItau.Api.entity.Cliente;
+import com.desafioItau.Api.entity.Contrato;
+import com.desafioItau.Api.repository.ContratoRepository;
+import com.desafioItau.Api.responses.Response;
 
-import com.desafioItau.Api.Exception.ContratoVencidoException;
+import com.desafioItau.Api.exception.ContratoVencidoException;
 
 @RestController
 @RequestMapping("/contrato")
