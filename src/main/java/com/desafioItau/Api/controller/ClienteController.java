@@ -33,7 +33,7 @@ import com.desafioItau.Api.repository.ClienteRepository;
 import com.desafioItau.Api.responses.Response;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
 
 	@Autowired
