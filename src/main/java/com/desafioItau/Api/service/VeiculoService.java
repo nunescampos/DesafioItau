@@ -2,13 +2,11 @@ package com.desafioItau.Api.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
-
 import com.desafioItau.Api.entity.Veiculo;
 
 public interface VeiculoService {
 	
+	/*
 	List<Veiculo> listarTodosVeiculo();
 	
 	Veiculo consultarVeiculoPeloID(Long id);
@@ -27,7 +25,7 @@ public interface VeiculoService {
 	
 	void deletar(Long id);
 
-
+*/
    public List<Veiculo> obterTodos();
 	
 	public Veiculo obterPorCodigo(long codigo);

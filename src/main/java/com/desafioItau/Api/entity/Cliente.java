@@ -2,10 +2,10 @@ package com.desafioItau.Api.entity;
 
 import javax.validation.constraints.Email;
 
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,7 +26,6 @@ public class Cliente {
 	private String email;
 
 	@NotEmpty(message = "Cpf nao pode ser vazio")
-	@CPF(message = "Cpf invalido")
 	private Long cpf;
 
 	@NotBlank(message = "Cidade nao pode ser vazio")
