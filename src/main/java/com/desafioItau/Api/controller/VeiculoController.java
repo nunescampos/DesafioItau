@@ -6,93 +6,148 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.*;
+
+import com.desafioItau.Api.util.Optional;
+import com.desafioItau.Api.exception.ClienteNotFoundException;
+import com.desafioItau.Api.exception.ContratoVencidoException;
+import com.desafioItau.Api.exception.CpfException;
+import com.desafioItau.Api.exception.VeiculoNotFoundException;
+import com.desafioItau.Api.entity.Cliente;
 import com.desafioItau.Api.entity.Veiculo;
-import com.desafioItau.Api.entity.dto.VeiculoRequestDto;
-import com.desafioItau.Api.service.*;
+import com.desafioItau.Api.repository.ClienteRepository;
+import com.desafioItau.Api.repository.VeiculoRepository;
+import com.desafioItau.Api.responses.Response;
 
 @RestController
-@RequestMapping(path = "/veiculos", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("/veiculo")
 public class VeiculoController {
-	
+
 	@Autowired
-	private VeiculoService veiculoService;
-	
-	@GetMapping
-	public ResponseEntity<List<Veiculo>> listarTodosVeiculos() {
-		return new ResponseEntity<>(veiculoService.listarTodosVeiculo(), HttpStatus.OK);
+	private VeiculoRepository veiculoRepository;
+
+	@GetMapping(value = "/")
+	public List<Veiculo> listarTodos() {
+
+		return veiculoRepository.findAll();
 	}
-	
+
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<Veiculo>consultarVeiculoPeloID(@PathVariable Long id) {
-		Veiculo veiculo =  veiculoService.consultarVeiculoPeloID(id);
-		if(veiculo != null)
-			return new ResponseEntity<>(veiculo, HttpStatus.OK);
-		return ResponseEntity.notFound().build();
+	public Veiculo listarPorId(@PathVariable(name = "id") long id) {
+
+		return veiculoRepository.findById(id).orElseThrow(() -> new VeiculoNotFoundException(id)) ;
 	}
+
+	@PostMapping(value = "/")
+	 @ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Response<Veiculo>> cadastrar(@Valid @RequestBody Veiculo veiculo, String cpf,
+			BindingResult result) {
+
+		if (validacaoCpf(cpf) == true) throw new CpfException(cpf);
+
+			if (result.hasErrors()) {
+
+				List<String> erros = new ArrayList<String>();
+
+				result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
+
+				return ResponseEntity.badRequest().body(new Response(erros));
+
+			}
+
+		
+		return ResponseEntity.ok(new Response<Veiculo>(this.veiculoRepository.save(veiculo)));
+	}
+
 	
-	@GetMapping(path = "/filter")
-	public ResponseEntity<List<Veiculo>> consultarVeiculosPeloFilter( 
-			Boolean vendido,  
-			Integer ano, 
-			String marca
-			) {
-		List<Veiculo> veiculos = new ArrayList<Veiculo>();
-		if(vendido != null ) {
-			veiculos = veiculoService.consultarVeiculosPeloVendido(vendido);
-		} else if(ano != null) {
-			veiculos = veiculoService.consultarVeiculosPeloAno(ano);
-		} else if(marca != null) {
-			veiculos = veiculoService.consultarVeiculosPelaMarca(marca);
+
+	@PutMapping(path = "/{id}")
+	public Veiculo cadastrarouatualizar(@PathVariable(name = "id") Long id,
+			@Valid @RequestBody Veiculo veiculo, BindingResult result) {
+		
+
+		return veiculoRepository.findById(id)
+                .map(x -> {
+                    x.setNome(veiculo.getNome());
+                    x.setAno(veiculo.getAno());
+                    x.setMarca(veiculo.getMarca());
+                    x.setDescricao(veiculo.getDescricao());
+                    return veiculoRepository.save(x);
+                })
+                .orElseGet(() -> {
+                	veiculo.setId(id);
+                    return veiculoRepository.save(veiculo);
+                });
+	}
+
+	@PostMapping(value = "/{id}")
+	public void deleteVeiculo(@PathVariable Long id) {
+		
+		veiculoRepository.deleteById(id);
+	}
+
+	public static boolean validacaoCpf(String cpfModel) {
+		String cpf = retirarMascaraCpf(cpfModel);
+		int d1, d2;
+		int digito1, digito2, resto;
+		int digitoCPF;
+		String nDigResult;
+
+		d1 = d2 = 0;
+		digito1 = digito2 = resto = 0;
+
+		for (int nCount = 1; nCount < cpf.length() - 1; nCount++) {
+			digitoCPF = Integer.valueOf(cpf.substring(nCount - 1, nCount)).intValue();
+
+			d1 = d1 + (11 - nCount) * digitoCPF;
+
+			d2 = d2 + (12 - nCount) * digitoCPF;
 		}
-		return new ResponseEntity<>(veiculos, HttpStatus.OK);
+		;
+
+		resto = (d1 % 11);
+
+		if (resto < 2)
+			digito1 = 0;
+		else
+			digito1 = 11 - resto;
+
+		d2 += 2 * digito1;
+
+		resto = (d2 % 11);
+
+		if (resto < 2)
+			digito2 = 0;
+		else
+			digito2 = 11 - resto;
+
+		String nDigVerific = cpf.substring(cpf.length() - 2, cpf.length());
+
+		nDigResult = String.valueOf(digito1) + String.valueOf(digito2);
+
+		return nDigVerific.equals(nDigResult);
 	}
-	
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Veiculo> cadastrar(@RequestBody @Valid VeiculoRequestDto veiculo) {
-		Veiculo veiculoCadastrado = veiculoService.cadastrar(veiculo); 
-		return new ResponseEntity<>(veiculoCadastrado, HttpStatus.CREATED);
+
+	private static String retirarMascaraCpf(String cpf) {
+		cpf = cpf.replace(".", "");
+		cpf = cpf.replace("-", "");
+		return cpf;
 	}
-	
-	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Veiculo> atualizarVeiculo(@RequestBody @Valid VeiculoRequestDto veiculo) {
-		Veiculo veiculoCadastrado = veiculoService.atualizar(veiculo); 
-		if(veiculoCadastrado!= null)
-			return new ResponseEntity<>(veiculoCadastrado, HttpStatus.OK);
-		return ResponseEntity.notFound().build();
-	}
-	
-	@PatchMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Veiculo> atualizarStatusVendidoVeiculo(@PathVariable Long id, @RequestParam Boolean status) {
-		veiculoService.atualizarStatusVendido(id, status); 
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	@DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Veiculo> apagarVeiculo(@PathVariable 	Long id) {
-		Veiculo veiculo =  veiculoService.consultarVeiculoPeloID(id);
-		if(veiculo != null) {
-			veiculoService.deletar(id); 
-			return new ResponseEntity<>(veiculo, HttpStatus.OK);			
-		}
-		return ResponseEntity.notFound().build();
-	}
-	
 
 }

@@ -1,88 +1,91 @@
 package com.desafioItau.Api.service.impl;
 
-import java.time.LocalDate;
-
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.desafioItau.Api.entity.Veiculo;
-import com.desafioItau.Api.entity.dto.VeiculoRequestDto;
 import com.desafioItau.Api.repository.VeiculoRepository;
 import com.desafioItau.Api.service.VeiculoService;
 
 @Service
-@Transactional(readOnly = true)
 public class VeiculoServiceImpl implements VeiculoService {
 
 	@Autowired
-	public VeiculoRepository veiculoRepository;
+	private VeiculoRepository veiculoRepository;
+	
+	@Override
+	public List<Veiculo> obterTodos() {
+		return this.veiculoRepository.findAll();
+	}
+
+	@Override
+	public Veiculo obterPorCodigo(long codigo) {
+		return this.veiculoRepository
+				.findById(codigo)
+				.orElseThrow(() -> new IllegalArgumentException("veiculo não existe"));
+	}
+
+	@Override
+	public Veiculo criar(Veiculo veiculo) {
+		return this.veiculoRepository.save(veiculo);
+	}
 
 	@Override
 	public List<Veiculo> listarTodosVeiculo() {
-		return veiculoRepository.findAll();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Veiculo consultarVeiculoPeloID(Long id) {
-		return veiculoRepository.findById(id).orElse(null);
-	}
-
-	@Override
-	@Transactional
-	public Veiculo cadastrar(String id) {
-		return veiculoRepository.save(id);
-	}
-
-	@Override
-	@Transactional
-	public Veiculo atualizar(VeiculoRequestDto veiculo) {
-		Veiculo veiculoEncontrado = consultarVeiculoPeloID(veiculo.getId());
-		if (veiculoEncontrado != null) {
-			veiculoEncontrado.setNome(veiculo.getNome());
-			veiculoEncontrado.setDescricao(veiculo.getDescricao());
-			veiculoEncontrado.setAno(veiculo.getAno());
-			veiculoEncontrado.setMarca(veiculo.getMarca());
-			veiculoEncontrado.setVendido(veiculo.getVendido());
-			veiculoEncontrado.setUpdated(LocalDate.now());
-			return veiculoRepository.save(veiculoEncontrado);
-		}
-		return veiculoEncontrado;
-	}
-
-	@Override
-	@Transactional
-	public Veiculo atualizarStatusVendido(Long id, Boolean status) {
-		Veiculo veiculoEncontrado = consultarVeiculoPeloID(id);
-		if (veiculoEncontrado != null) {
-			veiculoEncontrado.setVendido(status);
-			veiculoEncontrado.setUpdated(LocalDate.now());
-		}
-		return veiculoRepository.save(veiculoEncontrado);
-	}
-
-	@Override
-	@Transactional
-	public void deletar(Long id) {
-		veiculoRepository.deleteById(id);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Veiculo> consultarVeiculosPelaMarca(String marca) {
-		return veiculoRepository.findAllByMarca(marca);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Veiculo> consultarVeiculosPeloAno(Integer ano) {
-		return veiculoRepository.findAllByAno(ano);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Veiculo> consultarVeiculosPeloVendido(Boolean status) {
-		return veiculoRepository.findAllByVendido(status);
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Veiculo cadastrar(@Valid String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Veiculo atualizar(Veiculo veiculo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Veiculo atualizarStatusVendido(Long id, Boolean status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deletar(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

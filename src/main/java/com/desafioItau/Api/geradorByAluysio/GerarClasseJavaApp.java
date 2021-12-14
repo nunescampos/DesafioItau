@@ -29,15 +29,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import com.desafioItau.Api.Entity.Cliente;
-import com.desafioItau.Api.Repository.ClienteRepository;
+import com.desafioItau.Api.entity.Cliente;
+import com.desafioItau.Api.repository.ClienteRepository;
 
-//import br.com.dao.implementacao.DaoEntidade;
-//import br.com.project.bean.view.EntidadeBeanView;
-//import br.com.project.geral.controller.EntidadeController;
-//import br.com.repository.interfaces.RepositoryEntidade;
-//import br.com.srv.implementacao.SrvEntidadeImpl;
-//import br.com.srv.interfaces.SrvEntidade;
 
 /**
  * Tela para selecionar qual classe java será criada automaticamente Gera

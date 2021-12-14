@@ -11,9 +11,6 @@ import com.desafioItau.Api.entity.Veiculo;
 
 public interface ContratoRepository extends MongoRepository<Contrato, String> {
 	
-    List<Contrato> findAllById(String id);
-	
-	List<Veiculo> findAll(String id);
 	
   
 }
