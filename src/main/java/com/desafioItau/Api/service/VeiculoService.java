@@ -18,11 +18,13 @@ public interface VeiculoService {
 	
 	List<Veiculo> consultarVeiculosPeloVendido(Boolean status);
 	
-	Veiculo cadastrar(VeiculoRequestDto veiculo);
+	Veiculo cadastrar(String id);
 	
 	Veiculo atualizar(VeiculoRequestDto veiculo);
 	
 	Veiculo atualizarStatusVendido(Long id, Boolean status);
 	
 	void deletar(Long id);
+
+	
 }

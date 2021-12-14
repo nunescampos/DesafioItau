@@ -33,14 +33,8 @@ public class VeiculoServiceImpl implements VeiculoService {
 
 	@Override
 	@Transactional
-	public Veiculo cadastrar(VeiculoRequestDto veiculo) {
-		Veiculo v = new Veiculo();
-		v.setNome(veiculo.getNome());
-		v.setDescricao(veiculo.getDescricao());
-		v.setMarca(veiculo.getMarca());
-		v.setAno(veiculo.getAno());
-		v.setVendido(veiculo.getVendido());
-		return veiculoRepository.save(v);
+	public Veiculo cadastrar(String id) {
+		return veiculoRepository.save(id);
 	}
 
 	@Override
