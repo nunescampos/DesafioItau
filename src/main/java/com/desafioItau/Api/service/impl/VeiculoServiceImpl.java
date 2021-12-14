@@ -1,18 +1,18 @@
 package com.desafioItau.Api.service.impl;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.tinnova.models.Veiculo;
-import br.com.tinnova.models.dto.VeiculoRequestDto;
-import br.com.tinnova.repositories.VeiculoRepository;
-import br.com.tinnova.services.VeiculoService;
+import com.desafioItau.Api.entity.Veiculo;
+import com.desafioItau.Api.entity.dto.VeiculoRequestDto;
+import com.desafioItau.Api.repository.VeiculoRepository;
+import com.desafioItau.Api.service.VeiculoService;
 
 @Service
 @Transactional(readOnly = true)
