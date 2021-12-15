@@ -27,6 +27,21 @@ public class Veiculo {
 
 	@NonNull
 	private String descricao;
+	
+	@NonNull
+	private int valor = 0;
+	
+	@NonNull
+	private int valorEntrada = 0;
+	
+	@NonNull
+	private int numPrestacoes = 0;
+	
+	@NonNull
+	private double taxaJuros = 0;
+
+	@NonNull
+	private double valorPrestacao = 0;
 
 	private Boolean vendido = Boolean.FALSE;
 
