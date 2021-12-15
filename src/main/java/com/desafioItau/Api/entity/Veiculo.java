@@ -55,4 +55,7 @@ public class Veiculo {
 
 	private LocalDate updated;
 
-}
+	@DBRef
+	private Contrato proposta;
+
+	}

@@ -17,7 +17,7 @@ import lombok.Data;
 public class Cliente {
 
 	@Id
-	private String id;
+	private long id;
 	
 	@NotBlank(message = "Nome nao pode ser vazio")
 	private String nome;
@@ -38,11 +38,12 @@ public class Cliente {
 	@DBRef
 	private Veiculo renavam;
 
+
 	
 	public Cliente() {
 	}
 
-	public Cliente(String id, String nome, String email, Long cpf) {
+	public Cliente(long id, String nome, String email, Long cpf) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;

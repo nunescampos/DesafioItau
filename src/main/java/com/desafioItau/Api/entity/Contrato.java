@@ -5,13 +5,14 @@ import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 
 
 public class Contrato {
 	
 	@Id
-	private String id;
+	private long id;
 	
 	private float numero;
 	
@@ -23,33 +24,43 @@ public class Contrato {
 
 	private String valor_apolice;
 
-	private String cobertura;
 	
-	
+	@DBRef
+	private Veiculo proposta;
+
 	
 	public Contrato() {
 	}
 
-	public Contrato(String id, float numero, String placa_veiculo, Date inicio_Vigencia, Date fim_Vigencia, String valor_apolice, String cobertura) {
+	public Contrato(long id, float numero, String placa_veiculo, Date inicio_Vigencia, Date fim_Vigencia, String valor_apolice, Veiculo proposta) {
 		this.id = id;
 		this.numero = numero;
 		this.placa_veiculo = placa_veiculo;
 		this.inicio_Vigencia = inicio_Vigencia;
 		this.fim_Vigencia = fim_Vigencia;
 		this.valor_apolice = valor_apolice;
-		this.cobertura = cobertura;
+		this.proposta = proposta;
 	}
 	
 	
-
-	public String getId() {
+	
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
+	public Veiculo getProposta() {
+		return proposta;
+	}
+
+	public void setProposta(Veiculo proposta) {
+		this.proposta = proposta;
+	}
+
+	
 	@NotBlank(message = "Numero nao pode ser vazio")
 	public float getNumero() {
 		return numero;
@@ -59,14 +70,6 @@ public class Contrato {
 		this.numero = numero;
 	}
 
-	@NotBlank(message = "cobertura nao pode ser vazio")	
-	public String getCobertura() {
-		return cobertura;
-	}
-
-	public void setCobertura(String cobertura) {
-		this.cobertura = cobertura;
-	}
 
 	
 	@NotBlank(message = "Placa nao pode ser vazio")

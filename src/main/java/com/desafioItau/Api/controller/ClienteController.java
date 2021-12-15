@@ -46,7 +46,7 @@ public class ClienteController {
 	}
 
 	@GetMapping(path = "/{id}")
-	public Cliente listarPorId(@PathVariable(name = "id") String id) {
+	public Cliente listarPorId(@PathVariable(name = "id") long id) {
 
 		return clienteRepository.findById(id).orElseThrow(() -> new ClienteNotFoundException(id)) ;
 	}
@@ -75,7 +75,7 @@ public class ClienteController {
 	
 
 	@PutMapping(path = "/{id}")
-	public Cliente cadastrarouatualizar(@PathVariable(name = "id") String id,
+	public Cliente cadastrarouatualizar(@PathVariable(name = "id") long id,
 			@Valid @RequestBody Cliente cliente, BindingResult result) {
 
 		
@@ -96,7 +96,7 @@ public class ClienteController {
 	}
 
 	@PostMapping(value = "/{id}")
-	public void deleteCliente(@PathVariable String id) {
+	public void deleteCliente(@PathVariable long id) {
 		
 		clienteRepository.deleteById(id);
 	}

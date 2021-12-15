@@ -52,7 +52,7 @@ public class ContratoController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public Optional<Contrato> listarPorId(@PathVariable(name = "id") String id) {
+	public Optional<Contrato> listarPorId(@PathVariable(name = "id") long id) {
 		
 		return contratoRepository.findById(id);
 	}
@@ -102,7 +102,7 @@ public ResponseEntity<Response<Contrato>> atualizar(@PathVariable(name = "id") O
 	}
 	
 	@PostMapping(value = "/{id}")
-	public void deleteContrato(@PathVariable String id) {
+	public void deleteContrato(@PathVariable long id) {
 		
 		contratoRepository.deleteById(id);
 	}
