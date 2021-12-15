@@ -23,16 +23,21 @@ public class Contrato {
 
 	private String valor_apolice;
 
+	private String cobertura;
+	
+	
+	
 	public Contrato() {
 	}
 
-	public Contrato(String id, float numero, String placa_veiculo, Date inicio_Vigencia, Date fim_Vigencia, String valor_apolice) {
+	public Contrato(String id, float numero, String placa_veiculo, Date inicio_Vigencia, Date fim_Vigencia, String valor_apolice, String cobertura) {
 		this.id = id;
 		this.numero = numero;
 		this.placa_veiculo = placa_veiculo;
 		this.inicio_Vigencia = inicio_Vigencia;
 		this.fim_Vigencia = fim_Vigencia;
 		this.valor_apolice = valor_apolice;
+		this.cobertura = cobertura;
 	}
 	
 	
@@ -54,6 +59,16 @@ public class Contrato {
 		this.numero = numero;
 	}
 
+	@NotBlank(message = "cobertura nao pode ser vazio")	
+	public String getCobertura() {
+		return cobertura;
+	}
+
+	public void setCobertura(String cobertura) {
+		this.cobertura = cobertura;
+	}
+
+	
 	@NotBlank(message = "Placa nao pode ser vazio")
 	public String getPlaca_veiculo() {
 		return placa_veiculo;

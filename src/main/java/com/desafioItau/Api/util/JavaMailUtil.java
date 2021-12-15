@@ -28,6 +28,7 @@ public class JavaMailUtil {
 	
 		String contaEmail = "aluysio8812@gmail.com";
 		
+		// na versão 2.0 a conta de email e senha será colocado em um propierts separado da aplicação
 		String password = "75BEdg522@";
 		
 		Session session = Session.getInstance(properties, new Authenticator() {
