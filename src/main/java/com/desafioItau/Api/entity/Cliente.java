@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -34,6 +35,10 @@ public class Cliente {
 	@NotBlank(message = "Uf nao pode ser vazio")
 	private String uf;
 
+	@DBRef
+	private Veiculo renavam;
+
+	
 	public Cliente() {
 	}
 
@@ -48,6 +53,8 @@ public class Cliente {
 	public String toString() {
 		return id + "::" + nome + "::" + email + "::" + cpf + "::" + cidade + "::" + uf + "::";
 	}
+
+	
 
 
 }

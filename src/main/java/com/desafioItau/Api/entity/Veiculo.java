@@ -2,7 +2,9 @@ package com.desafioItau.Api.entity;
 
 import java.time.LocalDate;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import org.springframework.data.annotation.Id;
 
@@ -43,6 +45,10 @@ public class Veiculo {
 	@NonNull
 	private double valorPrestacao = 0;
 
+	@DBRef
+	private Veiculo renavam;
+
+		
 	private Boolean vendido = Boolean.FALSE;
 
 	private LocalDate created = LocalDate.now();
