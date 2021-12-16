@@ -17,7 +17,7 @@ import lombok.Data;
 public class Cliente {
 
 	@Id
-	private long id;
+	private String id;
 	
 	@NotBlank(message = "Nome nao pode ser vazio")
 	private String nome;
@@ -43,16 +43,17 @@ public class Cliente {
 	public Cliente() {
 	}
 
-	public Cliente(long id, String nome, String email, Long cpf) {
+	public Cliente(String id, String nome, String email, Long cpf, Veiculo renavam) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
+		this.renavam = renavam;
 	}
 
 	@Override
 	public String toString() {
-		return id + "::" + nome + "::" + email + "::" + cpf + "::" + cidade + "::" + uf + "::";
+		return id + "::" + nome + "::" + email + "::" + cpf + "::" + cidade + "::" + uf + "::" + renavam + "::";
 	}
 
 	

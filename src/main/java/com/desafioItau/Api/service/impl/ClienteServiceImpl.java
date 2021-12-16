@@ -28,7 +28,7 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public Cliente obterPorCodigo(long codigo) {
+	public Cliente obterPorCodigo(String codigo) {
 		return this.clienteRepository
 				.findById(codigo)
 				.orElseThrow(() -> new IllegalArgumentException("cliente não existe"));

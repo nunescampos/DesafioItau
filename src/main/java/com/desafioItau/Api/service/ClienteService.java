@@ -10,7 +10,7 @@ public interface ClienteService {
 
 	public List<Cliente> obterTodos();
 	
-	public Cliente obterPorCodigo(long codigo);
+	public Cliente obterPorCodigo(String codigo);
 	
 	public Cliente criar(Cliente funcionario);
 }

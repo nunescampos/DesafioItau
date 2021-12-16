@@ -8,7 +8,7 @@ public class ClienteNotFoundException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ClienteNotFoundException(long id) {
+	public ClienteNotFoundException(String id) {
         super("Cliente nao encontrado: " + id);
     }
 

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.desafioItau.Api.entity.Cliente;
 
-public interface ClienteRepository extends MongoRepository<Cliente, Long>{
+public interface ClienteRepository extends MongoRepository<Cliente, String>{
 
 
 }

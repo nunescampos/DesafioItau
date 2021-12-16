@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ContratoExceptionController {
 	@ExceptionHandler(value = ContratoVencidoException.class)
 	public ResponseEntity<Object> exception(ContratoVencidoException exception) {
-		return new ResponseEntity<>("Prestacao do contrato vencido ", HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<>("Apólice do contrato vencido ", HttpStatus.NOT_ACCEPTABLE);
 	}
 }
