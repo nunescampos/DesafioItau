@@ -50,7 +50,7 @@ public class VeiculoController {
 	}
 
 	@GetMapping(path = "/{id}")
-	public Veiculo listarPorId(@PathVariable(name = "id") long id) {
+	public Veiculo listarPorId(@PathVariable(name = "id") String id) {
 
 		return veiculoRepository.findById(id).orElseThrow(() -> new VeiculoNotFoundException(id)) ;
 	}
@@ -79,7 +79,7 @@ public class VeiculoController {
 	
 
 	@PutMapping(path = "/{id}")
-	public Veiculo cadastrarouatualizar(@PathVariable(name = "id") Long id,
+	public Veiculo cadastrarouatualizar(@PathVariable(name = "id") String id,
 			@Valid @RequestBody Veiculo veiculo, BindingResult result) {
 		
 
@@ -98,7 +98,7 @@ public class VeiculoController {
 	}
 
 	@PostMapping(value = "/{id}")
-	public void deleteVeiculo(@PathVariable Long id) {
+	public void deleteVeiculo(@PathVariable String id) {
 		
 		veiculoRepository.deleteById(id);
 	}

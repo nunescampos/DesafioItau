@@ -8,7 +8,7 @@ public interface ContratoService {
 	
 public List<Contrato> obterTodos();
 	
-	public Contrato obterPorCodigo(long codigo);
+	public Contrato obterPorCodigo(String codigo);
 	
 	public Contrato criar(Contrato contrato);
 	

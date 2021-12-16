@@ -16,7 +16,7 @@ import lombok.NonNull;
 public class Veiculo {
 
 	@Id
-	private Long id;
+	private String id;
 
 	@NonNull
 	private String nome;

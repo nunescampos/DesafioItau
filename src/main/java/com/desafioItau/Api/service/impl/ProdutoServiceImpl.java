@@ -7,37 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.desafioItau.Api.entity.Contrato;
+import com.desafioItau.Api.entity.Produto;
 import com.desafioItau.Api.repository.ContratoRepository;
 import com.desafioItau.Api.repository.ProdutoRepository;
 import com.desafioItau.Api.service.ContratoService;
+import com.desafioItau.Api.service.ProdutoService;
 
 @Service
-public class ContratoServiceImpl implements ContratoService {
+public class ProdutoServiceImpl implements ProdutoService {
 
-	@Autowired
-	private ContratoRepository contratoRepository;
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
 	@Override
-	public List<Contrato> obterTodos() {
-		return this.contratoRepository.findAll();
+	public List<Produto> obterTodos() {
+		return this.produtoRepository.findAll();
 	}
 
 	@Override
-	public Contrato obterPorCodigo(String codigo) {
-		return this.contratoRepository
+	public Produto obterPorCodigo(String codigo) {
+		return this.produtoRepository
 				.findById(codigo)
-				.orElseThrow(() -> new IllegalArgumentException("contrato não existe"));
+				.orElseThrow(() -> new IllegalArgumentException("produto não existe"));
 	}
 
 	@Override
-	public Contrato criar(Contrato contrato) {
+	public Produto criar(Produto produto) {
 		
 		
 		
-		return this.contratoRepository.save(contrato);
+		return this.produtoRepository.save(produto);
 	}
 
 }

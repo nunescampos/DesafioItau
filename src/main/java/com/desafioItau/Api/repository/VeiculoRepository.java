@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.desafioItau.Api.entity.Veiculo;
 
-public interface VeiculoRepository extends MongoRepository<Veiculo, Long> {
+public interface VeiculoRepository extends MongoRepository<Veiculo, String> {
 	
 }

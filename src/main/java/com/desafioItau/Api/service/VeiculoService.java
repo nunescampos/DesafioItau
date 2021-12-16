@@ -28,7 +28,7 @@ public interface VeiculoService {
 */
    public List<Veiculo> obterTodos();
 	
-	public Veiculo obterPorCodigo(long codigo);
+	public Veiculo obterPorCodigo(String codigo);
 	
 	public Veiculo criar(Veiculo funcionario);
 

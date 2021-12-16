@@ -29,7 +29,7 @@ public class VeiculoServiceImpl implements VeiculoService {
 	}
 
 	@Override
-	public Veiculo obterPorCodigo(long codigo) {
+	public Veiculo obterPorCodigo(String codigo) {
 		return this.veiculoRepository
 				.findById(codigo)
 				.orElseThrow(() -> new IllegalArgumentException("veiculo não existe"));

@@ -31,39 +31,40 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafioItau.Api.entity.Cliente;
 import com.desafioItau.Api.entity.Contrato;
-import com.desafioItau.Api.repository.ContratoRepository;
+import com.desafioItau.Api.entity.Produto;
+import com.desafioItau.Api.repository.ProdutoRepository;
 import com.desafioItau.Api.responses.Response;
 
 import com.desafioItau.Api.exception.ContratoVencidoException;
 
 @RestController
-@RequestMapping("/contrato")
-public class ContratoController {
+@RequestMapping("/produto")
+public class ProdutoController {
 
 	@Autowired
-	private ContratoRepository contratoRepository;
+	private ProdutoRepository produtoRepository;
 	
 	
 
 	@GetMapping(path = "/")
-	public ResponseEntity<Response<List<Contrato>>> listarTodosContratos() {
+	public ResponseEntity<Response<List<Produto>>> listarTodosProdutos() {
 		
-		return ResponseEntity.ok(new Response<List<Contrato>>(this.contratoRepository.findAll()));
+		return ResponseEntity.ok(new Response<List<Produto>>(this.produtoRepository.findAll()));
 	}
 	
 	@GetMapping(path = "/{id}")
-	public Optional<Contrato> listarPorId(@PathVariable(name = "id") String id) {
+	public Optional<Produto> listarPorId(@PathVariable(name = "id") String id) {
 		
-		return contratoRepository.findById(id);
+		return produtoRepository.findById(id);
 	}
 
 	
 	@PutMapping(path = "/{numero}")
 	 @ResponseStatus(HttpStatus.CREATED)
-public ResponseEntity<Response<Contrato>> cadastrar(@Valid @RequestBody Contrato contrato, String placa_veiculo, String valor_apolice, Date inicio_Vigencia, Date fim_Vigencia, BindingResult result) {
+public ResponseEntity<Response<Produto>> cadastrar(@Valid @RequestBody Produto produto, String placa_veiculo, String valor_apolice, Date inicio_Vigencia, Date fim_Vigencia, BindingResult result) {
 		
 		
-		contrato.setNumero(gerarApolice());
+		produto.setNumero(gerarApolice());
 		
 		if (verificavencimento(inicio_Vigencia,fim_Vigencia) == true) throw new ContratoVencidoException();
 		
@@ -77,10 +78,10 @@ public ResponseEntity<Response<Contrato>> cadastrar(@Valid @RequestBody Contrato
 			
 		}
 		
-		return ResponseEntity.ok(new Response<Contrato>(this.contratoRepository.save(contrato)));
+		return ResponseEntity.ok(new Response<Produto>(this.produtoRepository.save(produto)));
 	}
 	@PutMapping(path = "/{id}")
-public ResponseEntity<Response<Contrato>> atualizar(@PathVariable(name = "id") ObjectId id , @Valid @RequestBody Contrato contrato, Date inicio_Vigencia, Date fim_Vigencia, BindingResult result) {
+public ResponseEntity<Response<Produto>> atualizar(@PathVariable(name = "id") ObjectId id , @Valid @RequestBody Produto produto, Date inicio_Vigencia, Date fim_Vigencia, BindingResult result) {
 
 		if (verificavencimento(inicio_Vigencia,fim_Vigencia) == true) throw new ContratoVencidoException();
 		
@@ -96,15 +97,14 @@ public ResponseEntity<Response<Contrato>> atualizar(@PathVariable(name = "id") O
 			
 		}
 		
-		//contrato.setId(id);
 		
-		return ResponseEntity.ok(new Response<Contrato>(this.contratoRepository.save(contrato)));
+		return ResponseEntity.ok(new Response<Produto>(this.produtoRepository.save(produto)));
 	}
 	
 	@PostMapping(value = "/{id}")
-	public void deleteContrato(@PathVariable String id) {
+	public void deleteProduto(@PathVariable String id) {
 		
-		contratoRepository.deleteById(id);
+		produtoRepository.deleteById(id);
 	}
 	
 	

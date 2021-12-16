@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 public class Contrato {
 	
 	@Id
-	private long id;
+	private String id;
 	
 	private float numero;
 	
@@ -32,7 +32,7 @@ public class Contrato {
 	public Contrato() {
 	}
 
-	public Contrato(long id, float numero, String placa_veiculo, Date inicio_Vigencia, Date fim_Vigencia, String valor_apolice, Veiculo proposta) {
+	public Contrato(String id, float numero, String placa_veiculo, Date inicio_Vigencia, Date fim_Vigencia, String valor_apolice, Veiculo proposta) {
 		this.id = id;
 		this.numero = numero;
 		this.placa_veiculo = placa_veiculo;
@@ -44,11 +44,11 @@ public class Contrato {
 	
 	
 	
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.desafioItau.Api.entity.Contrato;
 import com.desafioItau.Api.entity.Veiculo;
 
-public interface ContratoRepository extends MongoRepository<Contrato, Long> {
+public interface ContratoRepository extends MongoRepository<Contrato, String> {
 	
 	
   
