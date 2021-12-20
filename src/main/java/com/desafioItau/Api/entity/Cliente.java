@@ -37,23 +37,27 @@ public class Cliente {
 
 	@DBRef
 	private Veiculo renavam;
+	
+	@DBRef
+	private Contrato apolice;
 
 
 	
 	public Cliente() {
 	}
 
-	public Cliente(String id, String nome, String email, Long cpf, Veiculo renavam) {
+	public Cliente(String id, String nome, String email, Long cpf, Veiculo renavam, Contrato apolice) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
 		this.renavam = renavam;
+		this.apolice = apolice;
 	}
 
 	@Override
 	public String toString() {
-		return id + "::" + nome + "::" + email + "::" + cpf + "::" + cidade + "::" + uf + "::" + renavam + "::";
+		return id + "::" + nome + "::" + email + "::" + cpf + "::" + cidade + "::" + uf + "::" + renavam + "::" + apolice + "::";
 	}
 
 	
