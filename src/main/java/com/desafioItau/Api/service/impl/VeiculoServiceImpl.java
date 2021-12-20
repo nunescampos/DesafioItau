@@ -38,11 +38,11 @@ public class VeiculoServiceImpl implements VeiculoService {
 	@Override
 	public Veiculo criar(Veiculo veiculo) {
 		
-		Contrato proposta = this.contratoRepository
+		Contrato produto = this.contratoRepository
 				.findById(veiculo.getProposta().getId())
 				.orElseThrow(() -> new IllegalArgumentException("proposta inexistente"));
 	
-		veiculo.setProposta(proposta);
+		veiculo.setProposta(produto);
 	
 		
 		return this.veiculoRepository.save(veiculo);

@@ -3,6 +3,7 @@ package com.desafioItau.Api.service.impl;
 import java.util.List;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public Produto criar(Produto produto) {
 		
-		
+		Produto seguradora = this.produtoRepository
+				.findById(produto.getProposta().getId())
+				.orElseThrow(() -> new IllegalArgumentException("segurado inexistente"));
+	
+		//produto.setProposta(seguradora);
+	
 		
 		return this.produtoRepository.save(produto);
 	}
